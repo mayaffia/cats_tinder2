@@ -39,7 +39,7 @@
 
 # Ссылка на скачивание актуальной версии APK
 
-https://github.com/mayaffia/cats_tinder/releases/tag/v1.1
+https://github.com/mayaffia/cats_tinder2/releases/tag/v1
 
 
 
