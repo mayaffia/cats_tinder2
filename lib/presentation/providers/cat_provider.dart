@@ -20,10 +20,14 @@ class CatProvider with ChangeNotifier {
 
   Future<void> fetchNewCat() async {
     try {
-      _currentCat = await _apiService.fetchRandomCat();
+      _currentCat = null;
+      notifyListeners();
+
+      final newCat = await _apiService.fetchRandomCat();
+      _currentCat = newCat;
       notifyListeners();
     } catch (e) {
-      _errorMessage = "Failed to load cat: ${e.toString()}";
+      _errorMessage = e.toString();
       notifyListeners();
     }
   }
@@ -43,7 +47,8 @@ class CatProvider with ChangeNotifier {
   }
 
   void dislikeCat() {
-    fetchNewCat;
+    fetchNewCat();
+    notifyListeners();
   }
 
   void removeLikedCat(Cat cat) {

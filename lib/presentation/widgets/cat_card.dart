@@ -36,15 +36,21 @@ class CatCard extends StatelessWidget {
         Positioned(
           top: 60,
           child: Dismissible(
-            key: UniqueKey(),
+            key: Key(cat.id),
             direction: DismissDirection.horizontal,
             onDismissed: (direction) {
+              final provider = Provider.of<CatProvider>(context, listen: false);
               if (direction == DismissDirection.startToEnd) {
-                catProvider.likeCat();
-              } else if (direction == DismissDirection.endToStart) {
-                catProvider.dislikeCat();
+                provider.likeCat();
+              } else {
+                provider.dislikeCat();
               }
+
+              provider.fetchNewCat();
             },
+            background: Container(color: Colors.green),
+            secondaryBackground: Container(color: Colors.red),
+
             child: SizedBox(
               width: 400.0,
               height: 500.0,
