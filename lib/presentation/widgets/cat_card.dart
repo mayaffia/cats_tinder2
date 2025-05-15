@@ -48,8 +48,6 @@ class CatCard extends StatelessWidget {
 
               provider.fetchNewCat();
             },
-            background: Container(color: Colors.green),
-            secondaryBackground: Container(color: Colors.red),
 
             child: SizedBox(
               width: 400.0,
