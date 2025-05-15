@@ -85,7 +85,6 @@ class LikedCatsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image with gradient overlay
                       Stack(
                         children: [
                           ClipRRect(
@@ -145,7 +144,6 @@ class LikedCatsScreen extends StatelessWidget {
 
                       const SizedBox(height: 16),
 
-                      // Breed info
                       Row(
                         children: [
                           Icon(Icons.pets, color: Colors.pink[300], size: 20),
@@ -163,7 +161,6 @@ class LikedCatsScreen extends StatelessWidget {
 
                       const SizedBox(height: 8),
 
-                      // Description
                       Text(
                         cat.breedDescription,
                         maxLines: 3,
@@ -177,7 +174,6 @@ class LikedCatsScreen extends StatelessWidget {
 
                       const SizedBox(height: 12),
 
-                      // Date & Likes
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
