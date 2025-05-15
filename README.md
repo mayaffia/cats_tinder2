@@ -31,7 +31,7 @@
 
 <img width="389" alt="image" src="https://github.com/user-attachments/assets/c160f76b-446e-44d5-aad2-d05c7dede088" />
 
-** Выпадающий список с фильтрами ** 
+**Выпадающий список с фильтрами** 
 
 <img width="387" alt="image" src="https://github.com/user-attachments/assets/bf844ad7-43c6-46eb-aa20-7738c2d65eb3" />
 
