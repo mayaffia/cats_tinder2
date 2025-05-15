@@ -10,7 +10,6 @@ final getIt = GetIt.instance;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 3. Настроить DI
   getIt.registerSingleton<ApiService>(ApiService());
   getIt.registerSingleton<CatProvider>(CatProvider(getIt<ApiService>()));
 
