@@ -1,0 +1,75 @@
+import 'package:cats_tinder/data/api_service.dart';
+import 'package:cats_tinder/domain/models/cat.dart';
+import 'package:flutter/material.dart';
+
+class CatProvider with ChangeNotifier {
+  final ApiService _apiService;
+  Cat? _currentCat;
+  int _likes = 0;
+  final List<Cat> _likedCats = [];
+  String _filterBreed = 'all';
+  List<String> _availableBreeds = [];
+
+  CatProvider(this._apiService);
+
+  Cat? get currentCat => _currentCat;
+  int get likes => _likes;
+  List<Cat> get likedCats => _likedCats;
+  List<String> get availableBreeds => _availableBreeds;
+  String get filterBreed => _filterBreed;
+
+  Future<void> fetchNewCat(BuildContext context) async {
+    try {
+      _currentCat = await _apiService.fetchRandomCat();
+      notifyListeners();
+    } catch (e) {
+      _showErrorDialog(context, "Failed to load cat: ${e.toString()}");
+    }
+  }
+
+  void likeCat() {
+    if (_currentCat != null) {
+      _likes++;
+      _likedCats.add(_currentCat!);
+      _updateAvailableBreeds();
+      notifyListeners();
+      fetchNewCat;
+    }
+  }
+
+  void dislikeCat() {
+    fetchNewCat;
+  }
+
+  void removeLikedCat(Cat cat) {
+    _likedCats.remove(cat);
+    _updateAvailableBreeds();
+    notifyListeners();
+  }
+
+  void setFilterBreed(String breed) {
+    _filterBreed = breed;
+    notifyListeners();
+  }
+
+  void _updateAvailableBreeds() {
+    _availableBreeds = _likedCats.map((cat) => cat.breedName).toSet().toList();
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+    );
+  }
+}

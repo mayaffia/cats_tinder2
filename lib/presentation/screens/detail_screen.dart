@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/cat.dart';
+import '../../domain/models/cat.dart';
 
 class DetailScreen extends StatelessWidget {
   final Cat cat;

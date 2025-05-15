@@ -1,3 +1,4 @@
+import 'package:cats_tinder/presentation/screens/liked_cats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cat_provider.dart';
@@ -14,7 +15,8 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CatProvider>(context, listen: false).fetchNewCat();
+    // Передаем контекст в метод
+    Provider.of<CatProvider>(context, listen: false).fetchNewCat(context);
   }
 
   @override
@@ -31,6 +33,16 @@ class HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LikedCatsScreen()),
+                ),
+          ),
+        ],
       ),
       body: Center(
         child:

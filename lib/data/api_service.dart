@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/cat.dart';
+import '../domain/models/cat.dart';
 
 class ApiService {
   static const String baseUrl = "https://api.thecatapi.com/v1";

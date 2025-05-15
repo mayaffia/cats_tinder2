@@ -1,5 +1,5 @@
-import 'package:cats_tinder/widgets/dislike_button.dart';
-import 'package:cats_tinder/widgets/like_button.dart';
+import 'package:cats_tinder/presentation/widgets/dislike_button.dart';
+import 'package:cats_tinder/presentation/widgets/like_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -85,7 +85,16 @@ class CatCard extends StatelessWidget {
             children: [
               DislikeButton(onPressed: () => catProvider.dislikeCat()),
               SizedBox(width: 100),
-              LikeButton(onPressed: () => catProvider.likeCat()),
+              LikeButton(
+                onPressed: () {
+                  final provider = Provider.of<CatProvider>(
+                    context,
+                    listen: false,
+                  );
+                  provider.likeCat();
+                  provider.fetchNewCat(context); // Передаем контекст
+                },
+              ),
             ],
           ),
         ),
