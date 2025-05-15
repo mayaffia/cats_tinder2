@@ -92,7 +92,7 @@ class CatCard extends StatelessWidget {
                     listen: false,
                   );
                   provider.likeCat();
-                  provider.fetchNewCat(context); // Передаем контекст
+                  provider.fetchNewCat();
                 },
               ),
             ],

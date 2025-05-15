@@ -18,14 +18,19 @@ class CatProvider with ChangeNotifier {
   List<String> get availableBreeds => _availableBreeds;
   String get filterBreed => _filterBreed;
 
-  Future<void> fetchNewCat(BuildContext context) async {
+  Future<void> fetchNewCat() async {
     try {
       _currentCat = await _apiService.fetchRandomCat();
       notifyListeners();
     } catch (e) {
-      _showErrorDialog(context, "Failed to load cat: ${e.toString()}");
+      _errorMessage = "Failed to load cat: ${e.toString()}";
+      notifyListeners();
     }
   }
+
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+  void clearError() => _errorMessage = null;
 
   void likeCat() {
     if (_currentCat != null) {

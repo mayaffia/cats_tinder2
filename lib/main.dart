@@ -5,16 +5,8 @@ import 'presentation/providers/cat_provider.dart';
 import 'presentation/screens/home_screen.dart';
 import 'package:get_it/get_it.dart';
 
-// void main() {
-//   runApp(
-//     MultiProvider(
-//       providers: [ChangeNotifierProvider(create: (_) => CatProvider())],
-//       child: MyApp(),
-//     ),
-//   );
-// }
 
-final getIt = GetIt.instance; // 2. Инициализировать GetIt
+final getIt = GetIt.instance; 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +20,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => getIt<CatProvider>(),
-        ), // 4. Использовать из GetIt
+        ), 
       ],
       child: const MyApp(),
     ),

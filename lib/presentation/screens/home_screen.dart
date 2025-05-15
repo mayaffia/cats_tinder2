@@ -15,8 +15,11 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Передаем контекст в метод
-    Provider.of<CatProvider>(context, listen: false).fetchNewCat(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        Provider.of<CatProvider>(context, listen: false).fetchNewCat();
+      }
+    });
   }
 
   @override
@@ -50,6 +53,39 @@ class HomeScreenState extends State<HomeScreen> {
                 ? CircularProgressIndicator()
                 : CatCard(),
       ),
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (Provider.of<CatProvider>(context).errorMessage != null && mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showErrorDialog(context);
+      });
+    }
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    final errorMessage = Provider.of<CatProvider>(context).errorMessage;
+    if (!mounted || errorMessage == null) return;
+
+    showDialog(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(errorMessage),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Provider.of<CatProvider>(context, listen: false).clearError();
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
     );
   }
 }
